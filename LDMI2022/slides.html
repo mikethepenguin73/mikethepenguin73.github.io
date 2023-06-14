@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Debian/Linux - Installiamolo su una Voting Machine</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Michele Bonsignore" />
+    <script src="libs/header-attrs-2.17/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Debian/Linux - Installiamolo su una Voting Machine
+]
+.author[
+### Michele Bonsignore
+]
+.date[
+### 22 Ottobre 2022
+]
+
+---
+
+### Riferimenti (una selezione di quanto c'è in rete)
+
+- Pagina di riferimento della community Ubuntu Linux [wiki-ubuntu](https://wiki.ubuntu-it.org/VotingMachineScuolaLombardia)
+
+- LugMan (Linux User Group di Mantova) [VotingVM](https://lugman.org/VotingM)
+
+- [Santi Strati](https://santi.smbit.it/technology/voting-machine-smartmatic-a4-210/)
+
+- [Come installarci su Android](http://thefridaylab.blogspot.com/2019/02/smartmatic-a4-210-le-famigerate-voting.html)
+
+- [Repository](https://git.sys42.eu/syntaxerrormmm/smartmatic-vm) per materiale riguardante le Voting Machine
+
+- La mia pagina sul blog [openlinux.it](https://openlinux.it/2021/03/21/debian-su-smartmatic-a4-210-puntata-1/)
+
+---
+
+### Hardware del dispositivo (SMARTMATIC A4 210)
+
+
+HARDWARE              | DESCRIZIONE
+----------------------| ---------------------------------------
+**PROCESSORE**        | Intel Atom x5-Z8350, Quad core 1.44 GHz
+**RAM**               | 2 GB
+**MEMORIA INTERNA**   | 16 GB
+**DISPLAY**           | 10” touchscreen, 1280×800 pixel
+**CONNETTIVITÀ**      | WiFi, Bluetooth
+**INTERFACCE**        | 3 USB
+**OS ORIGINALE**      | Ubuntu 16.04 LTS
+**DIMENSIONI**        | 24,2 x 25,1 x 12,5 cm
+**PESO**              | 2 Kg
+**ALTRO**             | Speaker audio, stampante integrata per carta termica
+
+--
+
+
+
+&lt;div style="float:left;"&gt;![](img/votingMachineLombardia.png)&lt;/div&gt;&lt;p&gt; **Visto il mio peso di 2 Kg non chiamatemi tablet, per favore !!!**&lt;/p&gt;
+
+---
+
+### Perchè ho scelto di Debian? Un po di storia ...
+
+--
+
+1. Debian può essere considerato a tutti gli effetti un sistema operativo universale, non ha bisogno di particolari requisiti hardware: attualmente supporta almeno una decina di architetture diverse.
+
+2. Per esperienza personale posso garantire che Debian stessa e alcune delle sue derivate (es. AntiX) sono in grado di funzionare su PC veramente obsoleti (es. l'Intel Centrino a casa di mia madre...).
+
+3. L'ampia community garantisce un buon supporto per i diversi problemi che si possono presentare in fase di installazione e configurazione.
+
+4. Il dispositivo che utilizzeremo ha un architettura a 64 bit con UEFI a 32 bit, su cui Debian ha un buon supporto. Ubuntu e altre distribuzioni derivate hanno invece dei problemi ad avviarsi correttamente su questo tipo di hardware.
+
+---
+
+### Punti a sfavore 
+
+--
+
+1. Debian rispetto ad altre distribuzioni non integra attualmente nell'immagine di installazione ufficiale repository **non-free**. Il team di coder di Debian dopo mesi di acceso dibattito ha recentemente deciso finalmente che integrerà nell'installer ufficiale anche i Non-Free Firmware (blob binari con codice proprietario).
+
+--
+
+2. Per motivi legati al suo [ciclo di rilascio delle nuove versioni](https://www.debian.org/doc/manuals/debian-handbook/sect.release-lifecycle.it.html) kernel alcuni pacchetti a volte risultano un po' datati.
+
+--
+
+3. La configurazione post-installazione può presentarsi problematica e richiede un po' di esperienza.
+
+--
+
+4. L'avanzamento di versione non sempre è indolore.
+
+---
+
+### Scelta del supporto di installazione
+
+Versione |   Codename  | Installer | Versione del Kernel |Desktop Environment
+---------|-------------|-----------|---------------------|
+10.13    |  Buster     | [debian-10.13.0-amd64-xfce-CD-1.iso](https://cdimage.debian.org/cdimage/archive/10.13.0/amd64/iso-cd/debian-10.13.0-amd64-xfce-CD-1.iso) | kernel 4.x | XFCE (gtk2)
+
+&gt; Nota: ho scelto di installare Debian/Buster per i seguenti motivi:
+ 
+ - Il kernel con cui è equipaggiato supporta il touch screen e le gesture sul dispositivo mentre con versioni più recenti questo supporto manca.
+ - Potremo decidere in un secondo momento se aggiornare il sistema alla versione 11 "Bullseye" mantenendo anche il vecchio kernel 'downgrade' quando mi serve sfruttare il touch del dispositivo.
+ - Il Desktop Environment XFCE è un buon compromesso fra spazio occupato su disco, funzionalità, facilità di configurazione e utilizzo.
+ - Il dispositivo non ha connettività ethernet, il wi-fi non viene riconosciuto pertanto non abbiamo modo di attivare i reposiory per aggiornare il sistema.
+
+---
+
+### Preparazione del supporto di installazione
+- L'immagine di installazione va "flashata" su una pendrive da almeno 700 MB (comando 'dd' oppure tool grafici come 'balenaEtcher')
+- Dobbiamo poi abilitare l'avvio da USB seguendo questa procedura: [Vm-bootdakey](https://lugman.org/Vm-bootdakey).
+- L'installazione è piuttosto semplice e intuitiva: https://debian-handbook.info/browse/it-IT/stable/sect.installation-steps.html
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"><small>Debian/Linux - Installiamolo su una voting machine</small></div>';
+    el.innerHTML += '<div class="footer">I contenuti prodotti da <a href="https://www.vimelug.org/">VIMELUG</a> sono integralmente rilasciati<br /> sotto licenza <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it">Creative Commons v. 4.0 CC BY-NC-SA</a></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"><small>Debian/Linux - Installiamolo su una voting machine</small></div>';
+    el.innerHTML += '<div class="footer">I contenuti prodotti da <a href="https://www.vimelug.org/">VIMELUG</a> sono integralmente rilasciati sotto licenza <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it">Creative Commons v. 4.0 CC BY-NC-SA</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+  });
+</script>
