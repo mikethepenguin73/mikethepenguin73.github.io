@@ -161,7 +161,7 @@ blockquote {
   color: #FF6601;
   background-image: url('../img/005.png');
   background-size: 100%;
-  color: #FFFFFF;
+  /*-- color: #FFFFFF; --*/
   text-shadow: none;
 }
 /*-- Headings (inverse) --*/
