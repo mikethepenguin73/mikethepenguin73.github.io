@@ -34,7 +34,7 @@ Per fortuna oggi sono felicemente debianizzato e ne vado fiero.
 ###`r fa("mastodon", fill = "#005EB8")` [mastodon.uno](https://mastodon.uno/@michelebonsignore)&nbsp;-&nbsp; `r fa("telegram", fill = "#005EB8")` [telegram](https://t.me/Mikethepenguin) <br> `r fa("linux", fill = "#005EB8")` [OpenLinux/bibliomike](https://openlinux.it/author/bibliomike/)
 
 ---
-class: inverse,middle
+class: inverse, middle
 
 #.warmyellow[Acknowledgments]
 
